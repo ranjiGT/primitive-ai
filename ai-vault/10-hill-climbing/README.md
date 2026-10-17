@@ -162,4 +162,302 @@ Examines neighboring states sequentially and moves to the first state that impro
 
 **Advantages:** Easy to implement and often computationally inexpensive.
 
-**Limitation:** The
+**Limitation:** The chosen improvement depends on neighbor examination order.
+
+### 2. Steepest-Ascent Hill Climbing
+
+Evaluates all immediate neighboring states and selects the one with the highest improvement.
+
+**Advantages:** Makes the best locally available move according to the evaluation function.
+
+**Limitation:** Evaluating every neighbor can be expensive.
+
+### 3. Stochastic Hill Climbing
+
+Randomly selects among improving neighboring states, potentially using a probability distribution.
+
+**Advantages:** Introduces randomness into the search.
+
+**Limitation:** May require additional iterations and does not guarantee a global optimum.
+
+### 4. First-Choice Hill Climbing
+
+Generates neighboring states randomly until it finds one that improves the current state.
+
+**Advantages:** Useful when the neighborhood is extremely large.
+
+**Limitation:** May spend time searching for an improving neighbor when improvements are rare.
+
+### 5. Random-Restart Hill Climbing
+
+Runs hill climbing multiple times from different randomly selected initial states.
+
+**Advantages:** Improves the chance of finding a better optimum.
+
+**Limitation:** Requires additional computational effort.
+
+## ⚠️ Common Problems in Hill Climbing
+
+### 🏔️ Local Maximum
+
+A local maximum is a state better than its neighboring states but not necessarily the best state in the entire search space.
+
+**Problem:** The algorithm stops even though a better solution exists elsewhere.
+
+**Possible Solution:** Random-restart hill climbing.
+
+### 🟰 Plateau
+
+A plateau is a region where neighboring states have equal or nearly equal evaluation values.
+
+**Problem:** The algorithm cannot identify a strictly improving direction.
+
+**Possible Solution:** Allow limited sideways moves or restart from another state.
+
+### ⛰️ Ridge
+
+A ridge is a narrow region of high evaluation values where the available moves may not align with the direction of improvement.
+
+**Problem:** The algorithm may struggle to follow the ridge using its current neighborhood definition.
+
+**Possible Solution:** Use a richer neighborhood, alternative move operators, or randomized search.
+
+### 🔄 Shoulder
+
+A shoulder is a flat region that may eventually lead to an improvement.
+
+**Problem:** A strictly improving algorithm may terminate before crossing it.
+
+**Possible Solution:** Permit a bounded number of sideways moves.
+
+## 💻 Python Implementation
+
+Let's implement **Steepest-Ascent Hill Climbing** using a simple mathematical objective function.
+
+We want to maximize:
+
+`f(x) = -(x - 5)² + 25`
+
+This function has its global maximum at `x = 5`, where `f(x) = 25`.
+
+```python
+def objective_function(x):
+    return -(x - 5) ** 2 + 25
+
+
+def hill_climbing(start, step_size=1):
+    current = start
+
+    while True:
+        neighbors = [
+            current - step_size,
+            current + step_size
+        ]
+
+        best_neighbor = max(
+            neighbors,
+            key=objective_function
+        )
+
+        if objective_function(best_neighbor) <= objective_function(current):
+            break
+
+        current = best_neighbor
+
+        print(
+            f"x = {current}, "
+            f"f(x) = {objective_function(current)}"
+        )
+
+    return current
+
+
+best_solution = hill_climbing(start=0)
+
+print("\nBest Solution:", best_solution)
+print("Maximum Value:", objective_function(best_solution))
+```
+
+### Expected Output
+
+```text
+x = 1, f(x) = 9
+x = 2, f(x) = 16
+x = 3, f(x) = 21
+x = 4, f(x) = 24
+x = 5, f(x) = 25
+
+Best Solution: 5
+Maximum Value: 25
+```
+
+### Explanation
+
+The algorithm starts at `x = 0` and examines two neighboring states at every iteration.
+
+It moves toward states with higher objective values until it reaches `x = 5`.
+
+At this point, both neighboring states have lower objective values, so the algorithm terminates.
+
+**Note:** The example is deliberately simple. The global maximum is known mathematically, but a general hill climbing algorithm cannot guarantee finding the global maximum for an arbitrary objective function.
+
+---
+
+## 🎲 Random-Restart Hill Climbing
+
+One technique for overcoming local maxima is to run hill climbing from multiple starting points.
+
+```python
+import random
+
+
+def random_restart_hill_climbing(
+    objective,
+    lower_bound,
+    upper_bound,
+    restarts=20
+):
+    def climb(start):
+        current = start
+
+        while True:
+            neighbors = [
+                x for x in (current - 1, current + 1)
+                if lower_bound <= x <= upper_bound
+            ]
+
+            better = [
+                x for x in neighbors
+                if objective(x) > objective(current)
+            ]
+
+            if not better:
+                return current
+
+            current = max(better, key=objective)
+
+    best_solution = None
+
+    for _ in range(restarts):
+        start = random.randint(
+            lower_bound,
+            upper_bound
+        )
+
+        solution = climb(start)
+
+        if (
+            best_solution is None
+            or objective(solution) > objective(best_solution)
+        ):
+            best_solution = solution
+
+    return best_solution
+
+
+result = random_restart_hill_climbing(
+    objective=objective_function,
+    lower_bound=-10,
+    upper_bound=10,
+    restarts=20
+)
+
+print("Best Solution:", result)
+print("Best Value:", objective_function(result))
+```
+
+Random restarts increase the chance of discovering a better solution when the search landscape contains multiple local optima.
+
+They do not guarantee a global optimum with a finite number of runs.
+
+## 🌍 Real-World Applications
+
+| Application | Role of Hill Climbing |
+|---|---|
+| Feature Selection | Search for useful feature subsets |
+| Hyperparameter Optimization | Improve model configurations |
+| Job Scheduling | Improve task assignments |
+| Route Optimization | Improve candidate routes |
+| Timetabling | Reduce scheduling conflicts |
+| Resource Allocation | Improve resource assignments |
+| Game AI | Improve evaluation-based decisions |
+| Engineering Design | Optimize design parameters |
+
+The effectiveness of hill climbing depends heavily on the objective function, neighborhood definition, and search landscape.
+
+## ⚖️ Advantages and Limitations
+
+### ✅ Advantages
+
+- **Simple Implementation:** Easy to understand and implement.
+- **Memory Efficient:** Usually stores only the current state and nearby candidates.
+- **Fast Local Improvement:** Often discovers better solutions quickly.
+- **Flexible:** Can be adapted to many optimization problems.
+- **Scalable Variants:** Randomized approaches can help with large neighborhoods.
+
+### ❌ Limitations
+
+- **Local Optima:** May stop before finding the global optimum.
+- **Plateaus:** Equal-valued neighboring states can prevent progress.
+- **Ridges:** Some search landscapes are difficult to navigate.
+- **Starting-Point Sensitivity:** Results may depend on the initial state.
+- **No General Optimality Guarantee:** A locally optimal solution may be far from globally optimal.
+
+## 🆚 Hill Climbing vs. Other Search Algorithms
+
+| Feature | Hill Climbing | BFS | A* Search |
+|---|---|---|---|
+| Search Type | Local optimization | Graph search | Heuristic graph search |
+| Main Objective | Improve evaluation value | Find a path | Find a low-cost path |
+| Memory Usage | Often low | Potentially high | Potentially high |
+| Uses Heuristic/Evaluation | Yes | No | Yes |
+| Global Optimality | Not guaranteed | Shortest path in unweighted graphs | Under suitable conditions |
+| Common Application | Optimization | Pathfinding | Pathfinding |
+
+Hill climbing is primarily used for optimization, whereas BFS and A* are commonly used to find paths through state spaces.
+
+## 📚 Learning Materials
+
+This chapter includes two PDF resources and an illustrated infographic.
+
+| Resource | Description |
+|---|---|
+| [📕 AI -18.pdf](AI%20-18.pdf) | Chapter learning material |
+| [📕 AI -19.pdf](AI%20-19.pdf) | Additional chapter learning material |
+| [🎨 Hill Climbing Infographic](Hill%20Climbing%20in%20AI%20Infographic.png) | Illustrated explanation of hill climbing and its challenges |
+
+Use the infographic as a visual reference while exploring the PDF learning materials.
+
+## 🎓 Learning Outcomes
+
+After completing this chapter, you should be able to:
+
+- [ ] Define the Hill Climbing Algorithm.
+- [ ] Explain how local search works.
+- [ ] Describe the role of an evaluation function.
+- [ ] Differentiate between local and global maxima.
+- [ ] Explain plateaus, ridges, and shoulders.
+- [ ] Compare different hill climbing variants.
+- [ ] Implement steepest-ascent hill climbing in Python.
+- [ ] Explain random-restart hill climbing.
+- [ ] Identify applications and limitations of hill climbing.
+
+## 💡 Key Takeaway
+
+> Hill Climbing is a local search technique that improves a solution step by step by moving toward better neighboring states. It is simple and efficient, but it can become trapped in local optima.
+
+Understanding hill climbing provides a foundation for more advanced optimization methods, including simulated annealing, evolutionary algorithms, and metaheuristic search.
+
+---
+
+## 🚀 Continue Learning
+
+Explore more chapters in the [AI Vault](../), including Cryptarithmetic Problems, intelligent agents, and AI problem-solving techniques.
+
+### ⭐ Support This Project
+
+If these visual explanations help you understand Artificial Intelligence, consider giving the [Primitive AI repository](https://github.com/ranjiGT/primitive-ai) a ⭐.
+
+**Learn • Explore • Build • Share**
+
+Made for curious minds and lifelong learners.
