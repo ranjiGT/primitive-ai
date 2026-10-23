@@ -16,7 +16,7 @@ This chapter introduces the 8-puzzle through visual explanations, state-space re
 
 <div align="center">
 
-![8-Puzzle Problem in Artificial Intelligence](./Eight%20Puzzle%20Problem%20in%20AI%20Infographic.png)
+![8-Puzzle Problem in Artificial Intelligence](./8-Puzzle%20AI%20Search%20Infographic.png)
 
 *Figure 1: An illustrated overview of the 8-Puzzle Problem, its components, possible moves, state-space search, and AI search algorithms.*
 
