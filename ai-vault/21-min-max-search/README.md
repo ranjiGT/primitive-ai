@@ -24,7 +24,7 @@ In this chapter, you will learn how Minimax explores game trees, evaluates possi
 
 <div align="center">
 
-![Min-Max Search in AI](./Min-Max%20Search%20in%20AI.png)
+![Min-Max Search in AI](./Min-Max%20Search%20in%20AI%20Infographic.png)
 
 *Figure 1: Cartoon-style infographic explaining Minimax search, MAX and MIN players, game-tree evaluation, utility propagation, Alpha-Beta Pruning, and game-playing applications.*
 
