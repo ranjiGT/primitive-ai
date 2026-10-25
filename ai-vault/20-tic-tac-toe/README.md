@@ -30,7 +30,7 @@ In this chapter, we will build a Tic-Tac-Toe AI capable of making optimal decisi
 
 <div align="center">
 
-![Tic-Tac-Toe in AI](./Tic-Tac-Toe%20in%20AI.png)
+![Tic-Tac-Toe in AI](./Tic-Tac-Toe%20in%20AI%20Infographic.png)
 
 *Figure 1: Cartoon-style infographic illustrating Tic-Tac-Toe rules, winning patterns, game trees, terminal states, Minimax search, and AI decision-making.*
 
