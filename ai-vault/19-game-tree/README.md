@@ -24,7 +24,7 @@ In this chapter, we explore how game trees are constructed, how players alternat
 
 <div align="center">
 
-![Game Tree in AI](./Game%20Tree%20in%20AI.png)
+![Game Tree in AI](./Game%20Trees%20in%20AI_%20Tic-Tac-Toe%20Explained.png)
 
 *Figure 1: Cartoon-style infographic explaining game-tree structure, MAX/MIN players, root and terminal nodes, Tic-Tac-Toe examples, tree expansion, utility values, and applications.*
 
