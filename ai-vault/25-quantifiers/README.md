@@ -28,7 +28,7 @@ Quantifiers are fundamental to **knowledge representation, automated reasoning, 
 
 <div align="center">
 
-![Quantifiers in Artificial Intelligence](./Quantifiers%20in%20AI.png)
+![Quantifiers in Artificial Intelligence](./Quantifiers%20in%20AI_%20A%20Visual%20Guide.png)
 
 *Figure 1: Cartoon-style infographic explaining universal and existential quantifiers, domains, predicates, quantifier scope, logical inference, and real-world applications in AI.*
 
