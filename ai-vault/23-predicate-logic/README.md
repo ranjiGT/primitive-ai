@@ -22,7 +22,7 @@ This chapter explores the foundations of predicate logic through visual explanat
 
 <div align="center">
 
-![Predicate Logic in AI](./Predicate%20Logic%20in%20AI.png)
+![Predicate Logic in AI](./Predicate%20Logic%20in%20AI%20Infographic.png)
 
 *Figure 1: Cartoon-style infographic illustrating predicates, variables, constants, quantifiers, knowledge representation, logical inference, family relationships, and applications of predicate logic in Artificial Intelligence.*
 
