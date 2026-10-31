@@ -24,7 +24,7 @@ In this chapter, you will learn how Alpha-Beta Pruning works, how alpha and beta
 
 <div align="center">
 
-![Alpha-Beta Pruning in AI](./Alpha-Beta%20Pruning%20in%20AI.png)
+![Alpha-Beta Pruning in AI](./Alpha–Beta%20Pruning%20in%20AI%20Infographic.png)
 
 *Figure 1: Cartoon-style infographic introducing Alpha-Beta Pruning, alpha and beta bounds, game-tree evaluation, pruning decisions, pseudocode, complexity, and applications.*
 
