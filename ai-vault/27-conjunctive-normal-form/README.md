@@ -35,7 +35,7 @@ By transforming logical expressions into CNF, AI systems can apply systematic re
 
 <div align="center">
 
-![Conjunctive Normal Form in Artificial Intelligence](./Conjunctive%20Normal%20Form%20%28CNF%29%20in%20AI.png)
+![Conjunctive Normal Form in Artificial Intelligence](./Colorful%20CNF%20in%20AI%20Infographic.png)
 
 *Figure 1: Cartoon-style infographic explaining CNF structure, logical clauses, conversion steps, distribution laws, resolution, SAT solving, and applications in Artificial Intelligence.*
 
